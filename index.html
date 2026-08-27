@@ -12,10 +12,6 @@ margin: 0;
 padding: 0;
 }
 
-html {
-scroll-behavior: smooth;
-}
-
 body {
 font-family: Arial, sans-serif;
 background: #f4f7f9;
@@ -26,310 +22,235 @@ line-height: 1.6;
 header {
 background: #111c16;
 color: white;
-padding: 22px 15px;
+padding: 25px 15px;
 text-align: center;
-position: sticky;
-top: 0;
-z-index: 1000;
 }
 
 header h1 {
-font-size: 30px;
+font-size: 32px;
 margin-bottom: 5px;
 }
 
 header p {
-color: #b8d8c5;
-font-size: 15px;
+color: #c9d8d0;
+margin-bottom: 18px;
 }
 
 nav {
-margin-top: 15px;
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+gap: 10px;
 }
 
-nav a {
+nav button {
+background: transparent;
+border: none;
 color: white;
-text-decoration: none;
-margin: 0 10px;
-font-size: 14px;
+padding: 10px 16px;
+border-radius: 6px;
+cursor: pointer;
+font-size: 15px;
 font-weight: bold;
 }
 
-nav a:hover {
-color: #54c7a3;
+nav button:hover,
+nav button.active {
+background: #35b9b0;
+}
+
+main {
+max-width: 1100px;
+margin: auto;
+padding: 35px 20px;
+}
+
+.page {
+display: none;
+}
+
+.page.active {
+display: block;
 }
 
 .hero {
-background: linear-gradient(135deg, #e7f8f1, #ffffff);
+background: white;
 text-align: center;
-padding: 80px 20px;
+padding: 55px 25px;
+border-radius: 15px;
+margin-bottom: 30px;
+box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
 .hero h2 {
-font-size: 44px;
-margin-bottom: 15px;
-color: #17221b;
+font-size: 34px;
+margin-bottom: 12px;
 }
 
 .hero p {
-max-width: 650px;
-margin: 0 auto 25px;
-color: #53635a;
-font-size: 18px;
-}
-
-.btn {
-display: inline-block;
-background: #42b89a;
-color: white;
-padding: 13px 25px;
-border-radius: 8px;
-text-decoration: none;
-border: none;
-cursor: pointer;
-font-size: 16px;
-font-weight: bold;
-transition: 0.3s;
-}
-
-.btn:hover {
-background: #319b80;
-transform: translateY(-2px);
-}
-
-section {
-padding: 65px 20px;
+max-width: 700px;
+margin: auto;
+color: #59655f;
+font-size: 17px;
 }
 
 .section-title {
 text-align: center;
-font-size: 32px;
-margin-bottom: 35px;
+font-size: 28px;
+margin-bottom: 25px;
 }
 
 .cards {
-max-width: 1100px;
-margin: auto;
 display: grid;
-grid-template-columns: repeat(4, 1fr);
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 gap: 20px;
 }
 
 .card {
 background: white;
-padding: 28px 20px;
+padding: 25px;
 border-radius: 14px;
-box-shadow: 0 5px 20px rgba(0,0,0,0.07);
-text-align: center;
-transition: 0.3s;
-}
-
-.card:hover {
-transform: translateY(-6px);
-}
-
-.card .icon {
-font-size: 35px;
-margin-bottom: 12px;
+box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
 .card h3 {
-margin-bottom: 10px;
 font-size: 21px;
+margin-bottom: 10px;
 }
 
 .card p {
-color: #68756d;
-font-size: 14px;
-}
-
-.workouts {
-background: #eaf7f2;
-}
-
-.workout-grid {
-max-width: 1100px;
-margin: auto;
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 22px;
-}
-
-.workout {
-background: white;
-border-radius: 14px;
-padding: 25px;
-box-shadow: 0 5px 18px rgba(0,0,0,0.06);
-}
-
-.workout h3 {
-color: #21876c;
-margin-bottom: 10px;
-}
-
-.workout ul {
-list-style: none;
-margin: 15px 0;
-}
-
-.workout li {
-padding: 7px 0;
-border-bottom: 1px solid #eee;
-}
-
-.workout li:last-child {
-border-bottom: none;
-}
-
-.nutrition {
-max-width: 1000px;
-margin: auto;
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 30px;
-align-items: center;
-}
-
-.nutrition-text h2 {
-font-size: 32px;
+color: #59655f;
 margin-bottom: 15px;
 }
 
-.nutrition-text p {
-color: #617068;
-margin-bottom: 15px;
+.card ul {
+margin: 15px 0 20px 20px;
 }
 
-.nutrition-list {
-background: white;
-padding: 25px;
-border-radius: 14px;
-box-shadow: 0 5px 18px rgba(0,0,0,0.06);
-}
-
-.nutrition-list div {
-padding: 12px;
-margin-bottom: 10px;
-background: #f0faf6;
-border-radius: 8px;
-}
-
-.progress-section {
-background: #111c16;
-color: white;
-text-align: center;
-}
-
-.progress-section p {
-color: #c2d3ca;
-max-width: 650px;
-margin: 0 auto 30px;
-}
-
-.progress-box {
-max-width: 700px;
-margin: auto;
-background: #1d2b23;
-padding: 30px;
-border-radius: 14px;
-}
-
-.progress-item {
-margin-bottom: 22px;
-text-align: left;
-}
-
-.progress-item:last-child {
-margin-bottom: 0;
-}
-
-.progress-label {
-display: flex;
-justify-content: space-between;
+.card li {
 margin-bottom: 7px;
 }
 
-.bar {
-height: 12px;
-background: #34443b;
-border-radius: 20px;
-overflow: hidden;
-}
-
-.fill {
-height: 100%;
-background: #42b89a;
-border-radius: 20px;
-}
-
-.goals {
-max-width: 900px;
-margin: auto;
-text-align: center;
-}
-
-.goal-form {
-background: white;
-max-width: 600px;
-margin: 25px auto;
-padding: 25px;
-border-radius: 14px;
-box-shadow: 0 5px 18px rgba(0,0,0,0.06);
-}
-
-input {
-width: 100%;
-padding: 13px;
-border: 1px solid #ccd7d1;
-border-radius: 8px;
-margin-bottom: 15px;
+.btn {
+background: #35b9b0;
+color: white;
+border: none;
+padding: 11px 18px;
+border-radius: 7px;
+cursor: pointer;
+font-weight: bold;
 font-size: 15px;
 }
 
-#goalMessage {
-margin-top: 15px;
+.btn:hover {
+background: #249b94;
+}
+
+.dark-card {
+background: #26342d;
+color: white;
+}
+
+.dark-card p {
+color: #d0dad5;
+}
+
+.stats {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+gap: 20px;
+margin-top: 30px;
+}
+
+.stat {
+background: white;
+text-align: center;
+padding: 25px;
+border-radius: 12px;
+box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.stat h3 {
+font-size: 32px;
+color: #35a69f;
+}
+
+.stat p {
+color: #59655f;
+}
+
+.form-box {
+background: white;
+max-width: 600px;
+margin: auto;
+padding: 30px;
+border-radius: 14px;
+box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.form-group {
+margin-bottom: 18px;
+}
+
+label {
+display: block;
 font-weight: bold;
-color: #21876c;
+margin-bottom: 6px;
+}
+
+input,
+select {
+width: 100%;
+padding: 12px;
+border: 1px solid #ccd5d0;
+border-radius: 7px;
+font-size: 16px;
+}
+
+.message {
+margin-top: 15px;
+padding: 12px;
+border-radius: 7px;
+background: #e5f7f4;
+color: #17655f;
+display: none;
+}
+
+.progress-bar {
+width: 100%;
+height: 25px;
+background: #dfe6e2;
+border-radius: 20px;
+overflow: hidden;
+margin: 15px 0;
+}
+
+.progress-fill {
+height: 100%;
+width: 0%;
+background: #35b9b0;
+transition: width 0.4s;
 }
 
 footer {
-background: #0b120e;
+margin-top: 40px;
+background: #111c16;
 color: white;
 text-align: center;
-padding: 30px 15px;
+padding: 25px;
 }
 
-footer p {
-color: #aebdb5;
-font-size: 14px;
-}
-
-@media (max-width: 850px) {
-.cards {
-grid-template-columns: repeat(2, 1fr);
-}
-
-.workout-grid {
-grid-template-columns: 1fr;
-}
-
-.nutrition {
-grid-template-columns: 1fr;
-}
-}
-
-@media (max-width: 550px) {
-.cards {
-grid-template-columns: 1fr;
-}
-
+@media (max-width: 600px) {
 .hero h2 {
-font-size: 34px;
+font-size: 27px;
 }
 
-nav a {
-display: inline-block;
-margin: 5px;
+header h1 {
+font-size: 26px;
+}
+
+main {
+padding: 25px 15px;
 }
 }
 </style>
@@ -343,80 +264,125 @@ margin: 5px;
 <p>Your journey. Your goals. Your fitness.</p>
 
 <nav>
-<a href="#home">Home</a>
-<a href="#workouts">Workouts</a>
-<a href="#nutrition">Nutrition</a>
-<a href="#progress">Progress</a>
-<a href="#goals">Goals</a>
+<button class="nav-btn active" onclick="showPage('home', this)">Home</button>
+<button class="nav-btn" onclick="showPage('workouts', this)">Workouts</button>
+<button class="nav-btn" onclick="showPage('nutrition', this)">Nutrition</button>
+<button class="nav-btn" onclick="showPage('progress', this)">Progress</button>
+<button class="nav-btn" onclick="showPage('goals', this)">Goals</button>
 </nav>
 </header>
 
-<!-- HERO -->
-<section class="hero" id="home">
+<main>
+
+<!-- HOME PAGE -->
+<section id="home" class="page active">
+
+<div class="hero">
 <h2>Become Stronger Every Day</h2>
-
 <p>
-Laweyti Fitness is your all-in-one fitness companion for
-workouts, nutrition, goals, and progress tracking.
+Your all-in-one fitness companion for workouts, nutrition,
+progress tracking, and reaching your goals.
 </p>
+<br>
+<button class="btn" onclick="goToPage('workouts')">
+Start Workout
+</button>
+</div>
 
-<a href="#workouts" class="btn">Start Workout</a>
-</section>
-
-<!-- FEATURES -->
-<section>
 <h2 class="section-title">Everything You Need</h2>
 
 <div class="cards">
 
 <div class="card">
-<div class="icon">🏋️</div>
-<h3>Workouts</h3>
+<h3>🏋️ Workouts</h3>
 <p>
 Follow workout programs designed for strength,
 cardio, fitness, and overall health.
 </p>
+<button class="btn" onclick="goToPage('workouts')">
+Explore Workouts
+</button>
 </div>
 
 <div class="card">
-<div class="icon">🥗</div>
-<h3>Nutrition</h3>
+<h3>🥗 Nutrition</h3>
 <p>
-Learn about healthy meals, nutrition, calories,
-protein, and hydration.
+Learn about healthy meals, calories, protein,
+and hydration.
 </p>
+<button class="btn" onclick="goToPage('nutrition')">
+View Nutrition
+</button>
 </div>
 
 <div class="card">
-<div class="icon">📈</div>
-<h3>Progress</h3>
+<h3>📊 Progress</h3>
 <p>
-Track your workouts, weight, goals, and fitness
+Track workouts, weight, goals, and your fitness
 progress over time.
 </p>
+<button class="btn" onclick="goToPage('progress')">
+View Progress
+</button>
 </div>
 
 <div class="card">
-<div class="icon">🎯</div>
-<h3>Goals</h3>
+<h3>🎯 Goals</h3>
 <p>
 Set personal fitness goals and stay motivated
 as you work toward them.
 </p>
+<button class="btn" onclick="goToPage('goals')">
+Set Goals
+</button>
 </div>
 
 </div>
+
+<br>
+
+<div class="card dark-card">
+<h2>🔥 Today's Workout</h2>
+<p>Full Body Starter • 20 minutes</p>
+<br>
+<button class="btn" onclick="startWorkout('Full Body Starter')">
+Start Today's Workout
+</button>
+</div>
+
+<div class="stats">
+<div class="stat">
+<h3 id="homeWorkouts">0</h3>
+<p>Workouts Completed</p>
+</div>
+
+<div class="stat">
+<h3 id="homeDays">0</h3>
+<p>Days Active</p>
+</div>
+
+<div class="stat">
+<h3 id="homeGoal">0%</h3>
+<p>Goal Progress</p>
+</div>
+</div>
+
 </section>
 
-<!-- WORKOUTS -->
-<section class="workouts" id="workouts">
+
+<!-- WORKOUTS PAGE -->
+<section id="workouts" class="page">
+
 <h2 class="section-title">Workout Programs</h2>
 
-<div class="workout-grid">
+<div class="cards">
 
-<div class="workout">
+<div class="card">
 <h3>💪 Strength Training</h3>
-<p>Build strength and muscle with a balanced routine.</p>
+
+<p>
+Build strength and muscle with a balanced routine.
+</p>
 
 <ul>
 <li>Squats — 3 × 12</li>
@@ -425,14 +391,19 @@ as you work toward them.
 <li>Plank — 3 × 30 sec</li>
 </ul>
 
-<button class="btn" onclick="startWorkout('Strength Training')">
+<button class="btn"
+onclick="startWorkout('Strength Training')">
 Start
 </button>
 </div>
 
-<div class="workout">
+
+<div class="card">
 <h3>🏃 Cardio</h3>
-<p>Improve endurance and cardiovascular fitness.</p>
+
+<p>
+Improve endurance and cardiovascular fitness.
+</p>
 
 <ul>
 <li>Warm-up — 5 min</li>
@@ -441,14 +412,19 @@ Start
 <li>Cool-down — 5 min</li>
 </ul>
 
-<button class="btn" onclick="startWorkout('Cardio')">
+<button class="btn"
+onclick="startWorkout('Cardio')">
 Start
 </button>
 </div>
 
-<div class="workout">
+
+<div class="card">
 <h3>🧘 Flexibility</h3>
-<p>Improve mobility, balance, and flexibility.</p>
+
+<p>
+Improve mobility, balance, and flexibility.
+</p>
 
 <ul>
 <li>Neck Stretch — 30 sec</li>
@@ -457,164 +433,449 @@ Start
 <li>Child's Pose — 60 sec</li>
 </ul>
 
-<button class="btn" onclick="startWorkout('Flexibility')">
+<button class="btn"
+onclick="startWorkout('Flexibility')">
 Start
 </button>
 </div>
 
 </div>
+
+<div id="workoutMessage" class="message"></div>
+
 </section>
 
-<!-- NUTRITION -->
-<section id="nutrition">
-<div class="nutrition">
 
-<div class="nutrition-text">
-<h2>Eat Better. Feel Better. 💚</h2>
+<!-- NUTRITION PAGE -->
+<section id="nutrition" class="page">
 
+<h2 class="section-title">Nutrition Guide</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>🥗 Healthy Meals</h3>
 <p>
-Good nutrition is an important part of reaching
-your fitness goals.
+Build balanced meals with vegetables, fruits,
+whole grains, and quality protein.
 </p>
 
+<ul>
+<li>Chicken and vegetables</li>
+<li>Brown rice and beans</li>
+<li>Greek yogurt and fruit</li>
+<li>Oatmeal with berries</li>
+</ul>
+</div>
+
+
+<div class="card">
+<h3>🥩 Protein</h3>
 <p>
-Focus on balanced meals, enough protein,
-fruits and vegetables, whole grains, and proper
-hydration.
+Protein helps support muscle repair and recovery.
 </p>
 
-<a href="#goals" class="btn">Set Your Goal</a>
+<ul>
+<li>Chicken</li>
+<li>Fish</li>
+<li>Eggs</li>
+<li>Beans</li>
+<li>Greek yogurt</li>
+</ul>
 </div>
 
-<div class="nutrition-list">
-<div>🥩 <strong>Protein:</strong> Supports muscle recovery.</div>
-<div>🥦 <strong>Vegetables:</strong> Full of vitamins and minerals.</div>
-<div>🍎 <strong>Fruit:</strong> Natural nutrients and energy.</div>
-<div>💧 <strong>Water:</strong> Stay hydrated throughout the day.</div>
-<div>🌾 <strong>Whole Grains:</strong> Long-lasting energy.</div>
+
+<div class="card">
+<h3>💧 Hydration</h3>
+<p>
+Staying hydrated helps your body perform and
+recover properly.
+</p>
+
+<button class="btn" onclick="drinkWater()">
+Log Water
+</button>
+
+<p id="waterCount">
+Water logged today: 0 glasses
+</p>
 </div>
 
 </div>
+
 </section>
 
-<!-- PROGRESS -->
-<section class="progress-section" id="progress">
+
+<!-- PROGRESS PAGE -->
+<section id="progress" class="page">
 
 <h2 class="section-title">Your Progress</h2>
 
-<p>
-Small improvements every day can lead to big results.
-Keep moving forward and stay consistent.
+<div class="stats">
+
+<div class="stat">
+<h3 id="progressWorkouts">0</h3>
+<p>Workouts Completed</p>
+</div>
+
+<div class="stat">
+<h3 id="progressDays">0</h3>
+<p>Days Active</p>
+</div>
+
+<div class="stat">
+<h3 id="progressGoal">0%</h3>
+<p>Goal Progress</p>
+</div>
+
+</div>
+
+<br>
+
+<div class="card">
+
+<h3>🎯 Overall Goal Progress</h3>
+
+<div class="progress-bar">
+<div id="progressFill" class="progress-fill"></div>
+</div>
+
+<p id="progressText">
+Complete workouts and set goals to increase your progress.
 </p>
 
-<div class="progress-box">
-
-<div class="progress-item">
-<div class="progress-label">
-<span>Workouts Completed</span>
-<span>75%</span>
 </div>
 
-<div class="bar">
-<div class="fill" style="width: 75%;"></div>
-</div>
-</div>
-
-<div class="progress-item">
-<div class="progress-label">
-<span>Weekly Activity</span>
-<span>60%</span>
-</div>
-
-<div class="bar">
-<div class="fill" style="width: 60%;"></div>
-</div>
-</div>
-
-<div class="progress-item">
-<div class="progress-label">
-<span>Nutrition Goals</span>
-<span>80%</span>
-</div>
-
-<div class="bar">
-<div class="fill" style="width: 80%;"></div>
-</div>
-</div>
-
-</div>
 </section>
 
-<!-- GOALS -->
-<section id="goals">
 
-<div class="goals">
+<!-- GOALS PAGE -->
+<section id="goals" class="page">
 
-<h2 class="section-title">Set Your Fitness Goal 🎯</h2>
+<h2 class="section-title">Set Your Fitness Goals</h2>
 
-<p>
-Choose a goal and stay committed to your journey.
-</p>
+<div class="form-box">
 
-<div class="goal-form">
+<div class="form-group">
+<label for="goalType">Choose a goal</label>
+
+<select id="goalType">
+<option value="Lose Weight">Lose Weight</option>
+<option value="Build Strength">Build Strength</option>
+<option value="Improve Cardio">Improve Cardio</option>
+<option value="Improve Flexibility">
+Improve Flexibility
+</option>
+<option value="Stay Active">Stay Active</option>
+</select>
+</div>
+
+<div class="form-group">
+<label for="goalTarget">Target</label>
 
 <input
 type="text"
-id="goalInput"
-placeholder="Example: Exercise 4 times a week"
+id="goalTarget"
+placeholder="Example: Work out 4 days per week"
 >
+</div>
 
 <button class="btn" onclick="saveGoal()">
 Save Goal
 </button>
 
-<p id="goalMessage"></p>
+<div id="goalMessage" class="message"></div>
 
 </div>
 
+<br>
+
+<div class="card" id="savedGoal">
+<h3>🎯 Current Goal</h3>
+<p>No goal has been set yet.</p>
 </div>
 
 </section>
 
+</main>
+
+
 <!-- FOOTER -->
 <footer>
-<h3>💪 Laweyti Fitness</h3>
-
-<p>
-Your journey. Your goals. Your fitness.
-</p>
-
-<p>
-© 2026 Laweyti Fitness. All rights reserved.
-</p>
+<p>© 2026 Laweyti Fitness</p>
+<p>Stay consistent. Stay strong. 💪</p>
 </footer>
 
-<!-- JAVASCRIPT -->
+
 <script>
 
-function startWorkout(workoutName) {
-alert(
-"Great choice! 💪\n\n" +
-workoutName +
-" workout started.\n\n" +
-"Stay focused and give it your best!"
-);
+/* -----------------------------
+DATA
+----------------------------- */
+
+let workoutsCompleted =
+Number(localStorage.getItem("workoutsCompleted")) || 0;
+
+let daysActive =
+Number(localStorage.getItem("daysActive")) || 0;
+
+let goalProgress =
+Number(localStorage.getItem("goalProgress")) || 0;
+
+let water =
+Number(localStorage.getItem("water")) || 0;
+
+
+/* -----------------------------
+PAGE NAVIGATION
+----------------------------- */
+
+function showPage(pageId, button) {
+
+const pages = document.querySelectorAll(".page");
+
+pages.forEach(function(page) {
+page.classList.remove("active");
+});
+
+const selectedPage =
+document.getElementById(pageId);
+
+if (selectedPage) {
+selectedPage.classList.add("active");
 }
 
-function saveGoal() {
-const goal = document.getElementById("goalInput").value.trim();
-const message = document.getElementById("goalMessage");
+const buttons =
+document.querySelectorAll(".nav-btn");
 
-if (goal === "") {
-message.textContent = "Please enter a goal first.";
+buttons.forEach(function(btn) {
+btn.classList.remove("active");
+});
+
+if (button) {
+button.classList.add("active");
+}
+
+window.scrollTo({
+top: 0,
+behavior: "smooth"
+});
+
+updateStats();
+}
+
+
+function goToPage(pageId) {
+
+const buttons =
+document.querySelectorAll(".nav-btn");
+
+buttons.forEach(function(button) {
+
+if (
+button.textContent
+.toLowerCase()
+.trim() === pageId.toLowerCase()
+) {
+showPage(pageId, button);
+}
+
+});
+
+}
+
+
+/* -----------------------------
+WORKOUTS
+----------------------------- */
+
+function startWorkout(workoutName) {
+
+workoutsCompleted++;
+
+localStorage.setItem(
+"workoutsCompleted",
+workoutsCompleted
+);
+
+goalProgress += 5;
+
+if (goalProgress > 100) {
+goalProgress = 100;
+}
+
+localStorage.setItem(
+"goalProgress",
+goalProgress
+);
+
+const message =
+document.getElementById("workoutMessage");
+
+if (message) {
+
+message.textContent =
+"Great job! You started " +
+workoutName +
+". Keep going! 💪";
+
+message.style.display = "block";
+}
+
+alert(
+"Workout started: " +
+workoutName +
+" 💪"
+);
+
+updateStats();
+}
+
+
+/* -----------------------------
+WATER TRACKING
+----------------------------- */
+
+function drinkWater() {
+
+water++;
+
+localStorage.setItem("water", water);
+
+document.getElementById("waterCount").textContent =
+"Water logged today: " +
+water +
+" glasses 💧";
+
+}
+
+
+/* -----------------------------
+GOALS
+----------------------------- */
+
+function saveGoal() {
+
+const goalType =
+document.getElementById("goalType").value;
+
+const goalTarget =
+document.getElementById("goalTarget").value.trim();
+
+const message =
+document.getElementById("goalMessage");
+
+if (goalTarget === "") {
+
+message.textContent =
+"Please enter a target for your goal.";
+
+message.style.display = "block";
+
 return;
 }
 
-message.textContent =
-"🎯 Goal saved: " + goal;
+localStorage.setItem(
+"goalType",
+goalType
+);
 
-document.getElementById("goalInput").value = "";
+localStorage.setItem(
+"goalTarget",
+goalTarget
+);
+
+message.textContent =
+"Your goal has been saved successfully! 🎯";
+
+message.style.display = "block";
+
+displayGoal();
+
+updateStats();
+
 }
+
+
+function displayGoal() {
+
+const goalType =
+localStorage.getItem("goalType");
+
+const goalTarget =
+localStorage.getItem("goalTarget");
+
+const savedGoal =
+document.getElementById("savedGoal");
+
+if (
+goalType &&
+goalTarget &&
+savedGoal
+) {
+
+savedGoal.innerHTML = `
+<h3>🎯 Current Goal</h3>
+<p><strong>Goal:</strong> ${goalType}</p>
+<p><strong>Target:</strong> ${goalTarget}</p>
+<p><strong>Progress:</strong> ${goalProgress}%</p>
+`;
+
+}
+
+}
+
+
+/* -----------------------------
+UPDATE STATISTICS
+----------------------------- */
+
+function updateStats() {
+
+document.getElementById("homeWorkouts").textContent =
+workoutsCompleted;
+
+document.getElementById("homeDays").textContent =
+daysActive;
+
+document.getElementById("homeGoal").textContent =
+goalProgress + "%";
+
+
+document.getElementById("progressWorkouts").textContent =
+workoutsCompleted;
+
+document.getElementById("progressDays").textContent =
+daysActive;
+
+document.getElementById("progressGoal").textContent =
+goalProgress + "%";
+
+
+document.getElementById("progressFill").style.width =
+goalProgress + "%";
+
+
+document.getElementById("progressText").textContent =
+"You are " +
+goalProgress +
+"% toward your current goal.";
+
+}
+
+
+/* -----------------------------
+INITIALIZE APP
+----------------------------- */
+
+displayGoal();
+
+updateStats();
+
+document.getElementById("waterCount").textContent =
+"Water logged today: " +
+water +
+" glasses 💧";
 
 </script>
 
