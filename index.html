@@ -1,1093 +1,1472 @@
 /* =====================================================
-LAWeyti FITNESS - MAIN STYLES
+LAWeyti FITNESS
+MAIN JAVASCRIPT
 ===================================================== */
 
 
-/* ---------- RESET ---------- */
+/* =====================================================
+WORKOUT DATA
+===================================================== */
 
-* {
-box-sizing: border-box;
+const workoutPrograms = [
+
+/* ================= STRENGTH ================= */
+
+{
+id: "strength",
+
+icon: "💪",
+
+name: "Strength Training",
+
+description:
+"Build strength and muscle with a balanced routine.",
+
+exercises: [
+
+{
+name: "Legs",
+detail:
+"Squats • Lunges • Step-ups",
+icon: "🦵"
+},
+
+{
+name: "Arms",
+detail:
+"Push-ups • Curls • Triceps",
+icon: "💪"
+},
+
+{
+name: "Chest",
+detail:
+"Push-ups • Chest Press",
+icon: "🏋️"
+},
+
+{
+name: "Core",
+detail:
+"Crunches • Mountain Climbers",
+icon: "🔥"
+},
+
+{
+name: "Planks",
+detail:
+"Front Plank • Side Plank",
+icon: "🧱"
+},
+
+{
+name: "Full Body",
+detail:
+"Squats • Push-ups • Lunges • Plank",
+icon: "⚡"
 }
 
+],
 
-/* ---------- COLORS ---------- */
+preview: [
 
-:root {
+"Squats — 3 × 12",
 
---dark: #243746;
+"Push-ups — 3 × 10",
 
---dark2: #31495b;
+"Lunges — 3 × 10",
 
---blue: #18a9cf;
+"Plank — 3 × 30 sec"
 
---blue2: #45c6e4;
+]
+},
 
---bg: #eaf9fc;
 
---card: #fffdf4;
+/* ================= CARDIO ================= */
 
---text: #263744;
+{
+id: "cardio",
 
---muted: #607582;
+icon: "🏃",
 
---shadow:
-0 12px 30px rgba(35, 72, 88, 0.12);
+name: "Cardio",
+
+description:
+"Improve endurance and cardiovascular fitness.",
+
+exercises: [
+
+{
+name: "Walking",
+detail:
+"Brisk walking • 20 min",
+icon: "🚶"
+},
+
+{
+name: "Jogging",
+detail:
+"Easy-to-moderate jog • 15 min",
+icon: "🏃"
+},
+
+{
+name: "Jumping Jacks",
+detail:
+"3 × 30",
+icon: "⭐"
+},
+
+{
+name: "Cycling",
+detail:
+"Steady cycling • 20 min",
+icon: "🚴"
+},
+
+{
+name: "HIIT",
+detail:
+"Short work/rest intervals",
+icon: "🔥"
+},
+
+{
+name: "Full Cardio",
+detail:
+"Warm-up • Cardio • Cool-down",
+icon: "⚡"
 }
 
+],
 
-/* ---------- BODY ---------- */
+preview: [
 
-body {
+"Warm-up — 5 min",
 
-margin: 0;
+"Jogging — 15 min",
 
-font-family:
-Arial,
-Helvetica,
-sans-serif;
+"Jumping Jacks — 3 × 30",
 
-color: var(--text);
+"Cool-down — 5 min"
 
-background:
-linear-gradient(
-135deg,
-#f4ffff,
-#dff5f8
+]
+},
+
+
+/* ================= FLEXIBILITY ================= */
+
+{
+id: "flexibility",
+
+icon: "🧘",
+
+name: "Flexibility",
+
+description:
+"Improve mobility, balance, and flexibility.",
+
+exercises: [
+
+{
+name: "Neck Stretch",
+detail:
+"30 seconds",
+icon: "🧘"
+},
+
+{
+name: "Shoulder Stretch",
+detail:
+"30 seconds",
+icon: "🙆"
+},
+
+{
+name: "Hamstring Stretch",
+detail:
+"30 seconds",
+icon: "🦵"
+},
+
+{
+name: "Child's Pose",
+detail:
+"60 seconds",
+icon: "🧘"
+},
+
+{
+name: "Hip Stretch",
+detail:
+"30 seconds",
+icon: "🌿"
+},
+
+{
+name: "Full Stretch",
+detail:
+"Complete flexibility routine",
+icon: "✨"
+}
+
+],
+
+preview: [
+
+"Neck Stretch — 30 sec",
+
+"Shoulder Stretch — 30 sec",
+
+"Hamstring Stretch — 30 sec",
+
+"Child's Pose — 60 sec"
+
+]
+}
+
+];
+
+
+
+/* =====================================================
+APP DATA
+===================================================== */
+
+const defaultState = {
+
+workouts: 0,
+
+water: 0,
+
+waterDate: "",
+
+activeDates: [],
+
+history: [],
+
+goal: null
+
+};
+
+
+let state = loadState();
+
+
+
+/* =====================================================
+LOAD DATA
+===================================================== */
+
+function loadState() {
+
+try {
+
+const saved =
+JSON.parse(
+localStorage.getItem(
+"laweytiFitnessState"
+)
 );
 
-min-height: 100vh;
+
+return {
+
+...defaultState,
+
+...(saved || {})
+
+};
+
+}
+
+catch (error) {
+
+return {
+
+...defaultState
+
+};
+
+}
+
 }
 
 
+
 /* =====================================================
-HEADER
+SAVE DATA
 ===================================================== */
 
-.site-header {
+function saveState() {
 
-background:
-linear-gradient(
-135deg,
-var(--dark),
-#344f63
+localStorage.setItem(
+
+"laweytiFitnessState",
+
+JSON.stringify(state)
+
 );
 
-color: white;
-
-padding:
-24px
-6%
-18px;
-
-position: sticky;
-
-top: 0;
-
-z-index: 20;
-
-box-shadow:
-0 4px 20px rgba(0,0,0,.15);
 }
 
-
-/* ---------- BRAND ---------- */
-
-.brand {
-
-display: flex;
-
-align-items: center;
-
-justify-content: center;
-
-gap: 12px;
-
-text-align: left;
-}
-
-
-.logo {
-
-font-size: 36px;
-}
-
-
-.brand h1 {
-
-margin: 0;
-
-font-size: 30px;
-}
-
-
-.brand p {
-
-margin: 5px 0 0;
-
-color: #b9eaf5;
-}
 
 
 /* =====================================================
-NAVIGATION
+TODAY'S DATE
 ===================================================== */
 
-nav {
+function todayKey() {
 
-display: flex;
+const date = new Date();
 
-justify-content: center;
+return (
 
-gap: 10px;
+date.getFullYear()
++ "-"
++ String(
+date.getMonth() + 1
+).padStart(2, "0")
++ "-"
++ String(
+date.getDate()
+).padStart(2, "0")
 
-margin-top: 18px;
-
-flex-wrap: wrap;
-}
-
-
-.nav-btn {
-
-border: 0;
-
-background: transparent;
-
-color: white;
-
-padding:
-10px
-17px;
-
-border-radius: 9px;
-
-font-size: 16px;
-
-cursor: pointer;
-
-font-weight: 700;
-}
-
-
-.nav-btn:hover,
-.nav-btn.active {
-
-background: var(--blue2);
-
-color: white;
-}
-
-
-/* =====================================================
-MAIN
-===================================================== */
-
-main {
-
-width:
-min(
-1150px,
-92%
 );
 
-margin: auto;
 }
 
-
-/* ---------- PAGES ---------- */
-
-.page {
-
-display: none;
-
-padding:
-48px
-0
-65px;
-
-min-height: 70vh;
-}
-
-
-.active-page {
-
-display: block;
-}
 
 
 /* =====================================================
-HERO
+PAGE NAVIGATION
 ===================================================== */
 
-.hero {
+function showPage(pageId) {
 
-display: grid;
+/*
+Hide every page
+*/
 
-grid-template-columns:
-1.5fr
-1fr;
+document
+.querySelectorAll(".page")
+.forEach(page => {
 
-gap: 30px;
-
-align-items: center;
-
-padding: 35px 0;
-}
-
-
-.eyebrow {
-
-font-size: 12px;
-
-letter-spacing: 2px;
-
-font-weight: 800;
-
-color: #138ba8;
-}
-
-
-.hero h2 {
-
-font-size: 52px;
-
-line-height: 1.05;
-
-margin: 14px 0;
-
-color: var(--dark);
-}
-
-
-.hero h2 span {
-
-color: #12a9c9;
-}
-
-
-.hero p {
-
-font-size: 18px;
-
-line-height: 1.7;
-
-color: var(--muted);
-
-max-width: 650px;
-}
-
-
-.hero-actions {
-
-display: flex;
-
-gap: 12px;
-
-flex-wrap: wrap;
-}
-
-
-/* =====================================================
-BUTTONS
-===================================================== */
-
-.primary-btn,
-.secondary-btn,
-.danger-btn {
-
-border: 0;
-
-border-radius: 10px;
-
-padding:
-13px
-22px;
-
-font-weight: 800;
-
-font-size: 15px;
-
-cursor: pointer;
-
-transition: .2s;
-}
-
-
-.primary-btn {
-
-background:
-linear-gradient(
-135deg,
-var(--blue),
-#1399bd
+page.classList.remove(
+"active-page"
 );
 
-color: white;
-}
+});
 
 
-.primary-btn:hover {
+/*
+Show selected page
+*/
 
-transform: translateY(-2px);
-
-filter: brightness(1.04);
-}
-
-
-.secondary-btn {
-
-background: white;
-
-color: #148eaa;
-
-border:
-2px solid
-#6fd2e4;
-}
+const page =
+document.getElementById(pageId);
 
 
-.danger-btn {
+if (page) {
 
-background: #ffe7e7;
-
-color: #b33b3b;
-
-margin-top: 20px;
-}
-
-
-.small {
-
-padding:
-10px
-17px;
-}
-
-
-/* =====================================================
-HERO CARD
-===================================================== */
-
-.hero-card {
-
-background: var(--card);
-
-border-radius: 24px;
-
-padding: 38px;
-
-box-shadow: var(--shadow);
-
-text-align: center;
-}
-
-
-.hero-icon {
-
-font-size: 55px;
-}
-
-
-.hero-card h3 {
-
-font-size: 24px;
-}
-
-
-/* =====================================================
-STATISTICS
-===================================================== */
-
-.stats-grid {
-
-display: grid;
-
-grid-template-columns:
-repeat(
-3,
-1fr
+page.classList.add(
+"active-page"
 );
 
-gap: 20px;
-
-margin: 25px 0;
 }
 
 
-.stat-card {
+/*
+Update navigation buttons
+*/
 
-background: var(--card);
+document
+.querySelectorAll(".nav-btn")
+.forEach(button => {
 
-padding: 28px;
+button.classList.toggle(
 
-border-radius: 18px;
+"active",
 
-box-shadow: var(--shadow);
+button.dataset.page === pageId
 
-text-align: center;
-}
-
-
-.stat-card strong {
-
-display: block;
-
-font-size: 38px;
-
-color: #1699b8;
-
-margin-bottom: 8px;
-}
-
-
-.stat-card span {
-
-color: var(--muted);
-
-font-weight: 700;
-}
-
-
-/* =====================================================
-CARDS
-===================================================== */
-
-.info-card,
-.progress-card,
-.history-card {
-
-background: var(--card);
-
-border-radius: 20px;
-
-padding: 28px;
-
-box-shadow: var(--shadow);
-
-margin-top: 25px;
-}
-
-
-.info-card h3,
-.progress-card h3 {
-
-margin-top: 0;
-}
-
-
-/* =====================================================
-SECTION HEADINGS
-===================================================== */
-
-.section-heading {
-
-text-align: center;
-
-margin-bottom: 35px;
-}
-
-
-.section-heading h2 {
-
-font-size: 38px;
-
-margin: 10px 0;
-}
-
-
-.section-heading p {
-
-color: var(--muted);
-}
-
-
-/* =====================================================
-WORKOUT CARDS
-===================================================== */
-
-.workout-grid {
-
-display: grid;
-
-grid-template-columns:
-repeat(
-3,
-1fr
 );
 
-gap: 22px;
+});
+
+
+window.scrollTo({
+
+top: 0,
+
+behavior: "smooth"
+
+});
+
+
+updateUI();
+
 }
 
-
-.workout-card {
-
-background: var(--card);
-
-border-radius: 20px;
-
-padding: 25px;
-
-box-shadow: var(--shadow);
-
-display: flex;
-
-flex-direction: column;
-}
-
-
-.workout-card h3 {
-
-font-size: 21px;
-
-margin:
-0
-0
-10px;
-}
-
-
-.workout-card p {
-
-color: var(--muted);
-
-line-height: 1.6;
-}
-
-
-.exercise-preview {
-
-padding-left: 20px;
-
-flex: 1;
-}
-
-
-.exercise-preview li {
-
-padding:
-9px
-0;
-
-border-bottom:
-1px solid
-#e2ecef;
-}
 
 
 /* =====================================================
-THREE COLUMN CARDS
+NAVIGATION BUTTONS
 ===================================================== */
 
-.three-grid {
+document
+.querySelectorAll(".nav-btn")
+.forEach(button => {
 
-display: grid;
+button.addEventListener(
+"click",
+() => {
 
-grid-template-columns:
-repeat(
-3,
-1fr
+showPage(
+button.dataset.page
 );
 
-gap: 22px;
 }
-
-
-.content-card {
-
-background: var(--card);
-
-border-radius: 20px;
-
-padding: 28px;
-
-box-shadow: var(--shadow);
-}
-
-
-.content-card h3 {
-
-margin-top: 0;
-
-font-size: 21px;
-}
-
-
-.content-card p,
-.content-card li {
-
-color: var(--muted);
-
-line-height: 1.7;
-}
-
-
-.content-card li {
-
-margin:
-8px
-0;
-}
-
-
-/* =====================================================
-PROGRESS
-===================================================== */
-
-.progress-track {
-
-height: 20px;
-
-background: #d8edf2;
-
-border-radius: 20px;
-
-overflow: hidden;
-
-margin:
-18px
-0;
-}
-
-
-.progress-fill {
-
-height: 100%;
-
-width: 0%;
-
-background:
-linear-gradient(
-90deg,
-#18a9cf,
-#45c6e4
 );
 
-border-radius: 20px;
+});
 
-transition:
-width
-.5s
-ease;
-}
 
 
 /* =====================================================
-HISTORY
+HOME BUTTONS
 ===================================================== */
 
-.history-item {
+document
+.querySelectorAll("[data-page-link]")
+.forEach(button => {
 
-padding:
-14px
-0;
+button.addEventListener(
+"click",
+() => {
 
-border-bottom:
-1px solid
-#e0ebee;
-
-color: var(--muted);
-}
-
-
-.history-item strong {
-
-color: var(--text);
-}
-
-
-.history-item small {
-
-color: #82949c;
-}
-
-
-/* =====================================================
-GOALS
-===================================================== */
-
-.goal-layout {
-
-display: grid;
-
-grid-template-columns:
-1fr
-1fr;
-
-gap: 25px;
-}
-
-
-.goal-form,
-.current-goal {
-
-background: var(--card);
-
-padding: 30px;
-
-border-radius: 20px;
-
-box-shadow: var(--shadow);
-}
-
-
-.goal-form {
-
-display: flex;
-
-flex-direction: column;
-
-gap: 10px;
-}
-
-
-.goal-form label {
-
-font-weight: 800;
-
-margin-top: 5px;
-}
-
-
-.goal-form select,
-.goal-form input {
-
-padding:
-13px
-14px;
-
-border:
-1px solid
-#cbdde2;
-
-border-radius: 9px;
-
-font-size: 16px;
-
-background: white;
-}
-
-
-.goal-form small {
-
-color: var(--muted);
-
-margin-bottom: 10px;
-}
-
-
-.current-goal p {
-
-color: var(--muted);
-
-line-height: 1.7;
-}
-
-
-/* =====================================================
-SUCCESS MESSAGE
-===================================================== */
-
-.success-message {
-
-background: #dff7fb;
-
-color: #197c91;
-
-border-radius: 10px;
-
-padding: 15px;
-
-margin-top: 18px;
-
-font-weight: 700;
-}
-
-
-.hidden {
-
-display: none !important;
-}
-
-
-/* =====================================================
-WORKOUT MODAL
-===================================================== */
-
-.modal {
-
-position: fixed;
-
-inset: 0;
-
-background:
-rgba(
-15,
-31,
-40,
-.65
+showPage(
+button.dataset.pageLink
 );
 
-display: flex;
-
-align-items: center;
-
-justify-content: center;
-
-padding: 20px;
-
-z-index: 100;
 }
-
-
-.modal-box {
-
-width:
-min(
-650px,
-100%
 );
 
-max-height: 90vh;
-
-overflow-y: auto;
-
-background: white;
-
-border-radius: 22px;
-
-padding: 32px;
-
-position: relative;
-
-box-shadow:
-0 25px 70px
-rgba(0,0,0,.25);
-}
+});
 
 
-.close-btn {
 
-position: absolute;
+/* =====================================================
+CREATE WORKOUT CARDS
+===================================================== */
 
-right: 17px;
+function renderWorkouts() {
 
-top: 10px;
-
-border: 0;
-
-background: none;
-
-font-size: 32px;
-
-cursor: pointer;
-
-color: #667;
-}
-
-
-.modal-box h2 {
-
-margin-top: 0;
-}
-
-
-/* ---------- EXERCISE CHOICES ---------- */
-
-.choice-grid {
-
-display: grid;
-
-grid-template-columns:
-repeat(
-2,
-1fr
+const grid =
+document.getElementById(
+"workoutGrid"
 );
 
-gap: 12px;
 
-margin-top: 20px;
+/*
+Create all workout cards
+*/
+
+grid.innerHTML =
+workoutPrograms
+.map(program => {
+
+return `
+
+<article class="workout-card">
+
+<h3>
+${program.icon}
+${program.name}
+</h3>
+
+
+<p>
+${program.description}
+</p>
+
+
+<ul class="exercise-preview">
+
+${program.preview
+.map(exercise => {
+
+return `
+<li>
+${exercise}
+</li>
+`;
+
+})
+.join("")
 }
 
+</ul>
 
-.choice-btn {
 
-border:
-2px solid
-#d5e7eb;
+<!-- START BUTTON -->
 
-background: white;
+<button
+class="primary-btn"
+data-start-program="${program.id}">
 
-border-radius: 14px;
+Start
 
-padding: 18px;
+</button>
 
-text-align: left;
+</article>
 
-cursor: pointer;
+`;
 
-font-weight: 800;
+})
+.join("");
 
-font-size: 15px;
 
-transition: .2s;
+/*
+Find every Start button
+and make it clickable.
+*/
+
+grid
+.querySelectorAll(
+"[data-start-program]"
+)
+.forEach(button => {
+
+button.addEventListener(
+"click",
+() => {
+
+openWorkoutChooser(
+
+button.dataset.startProgram
+
+);
+
+}
+);
+
+});
+
 }
 
-
-.choice-btn:hover {
-
-border-color: #24b2d0;
-
-background: #effcff;
-
-transform: translateY(-2px);
-}
-
-
-.choice-btn span {
-
-display: block;
-
-color: var(--muted);
-
-font-size: 13px;
-
-font-weight: 400;
-
-margin-top: 5px;
-}
 
 
 /* =====================================================
-TOAST
+OPEN WORKOUT CHOOSER
 ===================================================== */
 
-.toast {
+function openWorkoutChooser(
+programId
+) {
 
-position: fixed;
+/*
+Find the selected program
+*/
 
-bottom: 25px;
+const program =
+workoutPrograms.find(
+item =>
+item.id === programId
+);
 
-right: 25px;
 
-background: #243746;
+if (!program) {
 
-color: white;
+return;
 
-padding:
-14px
-18px;
-
-border-radius: 10px;
-
-box-shadow: var(--shadow);
-
-opacity: 0;
-
-transform:
-translateY(15px);
-
-pointer-events: none;
-
-transition: .25s;
-
-z-index: 200;
 }
 
 
-.toast.show {
+const modal =
+document.getElementById(
+"workoutModal"
+);
 
-opacity: 1;
 
-transform:
-translateY(0);
+const content =
+document.getElementById(
+"modalContent"
+);
+
+
+/*
+Create the popup
+with exercise choices
+*/
+
+content.innerHTML = `
+
+<span class="eyebrow">
+
+${program.name.toUpperCase()}
+
+</span>
+
+
+<h2>
+Choose your focus
+</h2>
+
+
+<p>
+Select what you want to work
+on today.
+</p>
+
+
+<div class="choice-grid">
+
+${program.exercises
+.map(
+(exercise, index) => {
+
+return `
+
+<button
+class="choice-btn"
+data-choice="${index}">
+
+${exercise.icon}
+
+${exercise.name}
+
+
+<span>
+
+${exercise.detail}
+
+</span>
+
+</button>
+
+`;
+
 }
+)
+.join("")
+}
+
+</div>
+
+`;
+
+
+/*
+Show popup
+*/
+
+modal.classList.remove(
+"hidden"
+);
+
+
+/*
+Make exercise choices clickable
+*/
+
+content
+.querySelectorAll(
+"[data-choice]"
+)
+.forEach(button => {
+
+button.addEventListener(
+"click",
+() => {
+
+const exercise =
+program.exercises[
+Number(
+button.dataset.choice
+)
+];
+
+
+startWorkout(
+program,
+exercise
+);
+
+}
+);
+
+});
+
+}
+
 
 
 /* =====================================================
-FOOTER
+START WORKOUT
 ===================================================== */
 
-footer {
+function startWorkout(
+program,
+exercise
+) {
 
-background: #30495a;
+const date =
+todayKey();
 
-color: white;
 
-text-align: center;
+/*
+Increase workout count
+*/
 
-padding: 25px;
+state.workouts += 1;
+
+
+/*
+Add today to active days
+*/
+
+if (
+!state.activeDates.includes(
+date
+)
+) {
+
+state.activeDates.push(
+date
+);
+
 }
 
 
-footer p {
+/*
+Save workout history
+*/
 
-margin: 5px;
+state.history.unshift({
 
-color: #d7edf3;
+program:
+program.name,
+
+exercise:
+exercise.name,
+
+date:
+new Date().toLocaleString()
+
+});
+
+
+/*
+Keep only last 20 workouts
+*/
+
+state.history =
+state.history.slice(
+0,
+20
+);
+
+
+/*
+Save everything
+*/
+
+saveState();
+
+
+/*
+Close popup
+*/
+
+document
+.getElementById(
+"workoutModal"
+)
+.classList.add(
+"hidden"
+);
+
+
+/*
+Show message underneath
+the workout cards
+*/
+
+const message =
+document.getElementById(
+"workoutMessage"
+);
+
+
+message.textContent =
+
+`Great choice ${exercise.icon}
+${exercise.name}!
+${program.name} started.
+Keep focused and give it your best! 💪`;
+
+
+message.classList.remove(
+"hidden"
+);
+
+
+/*
+Show small notification
+*/
+
+showToast(
+
+`Workout started:
+${exercise.name} 💪`
+
+);
+
+
+/*
+Update progress
+*/
+
+updateUI();
+
 }
+
 
 
 /* =====================================================
-MOBILE
+CLOSE WORKOUT POPUP
 ===================================================== */
 
-@media (max-width: 850px) {
+document
+.getElementById(
+"closeModal"
+)
+.addEventListener(
+"click",
+() => {
 
-.hero,
-.goal-layout {
-
-grid-template-columns: 1fr;
-}
-
-
-.workout-grid,
-.three-grid {
-
-grid-template-columns:
-1fr
-1fr;
-}
-
-
-.hero h2 {
-
-font-size: 42px;
-}
+document
+.getElementById(
+"workoutModal"
+)
+.classList.add(
+"hidden"
+);
 
 }
+);
 
 
-@media (max-width: 600px) {
 
-.stats-grid,
-.workout-grid,
-.three-grid,
-.choice-grid {
+/* =====================================================
+CLOSE POPUP BY CLICKING OUTSIDE
+===================================================== */
 
-grid-template-columns: 1fr;
-}
+document
+.getElementById(
+"workoutModal"
+)
+.addEventListener(
+"click",
+event => {
 
+if (
+event.target.id ===
+"workoutModal"
+) {
 
-.page {
+event.currentTarget
+.classList.add(
+"hidden"
+);
 
-padding-top: 30px;
-}
-
-
-.brand h1 {
-
-font-size: 24px;
-}
-
-
-.hero h2 {
-
-font-size: 36px;
-}
-
-
-.site-header {
-
-position: relative;
 }
 
 }
+);
+
+
+
+/* =====================================================
+WATER BUTTON
+===================================================== */
+
+document
+.getElementById(
+"waterBtn"
+)
+.addEventListener(
+"click",
+() => {
+
+const today =
+todayKey();
+
+
+/*
+If it's a new day,
+start water count over.
+*/
+
+if (
+state.waterDate !== today
+) {
+
+state.waterDate =
+today;
+
+state.water = 0;
+
+}
+
+
+/*
+Add one glass
+*/
+
+state.water += 1;
+
+
+saveState();
+
+
+showToast(
+"Water logged! 💧"
+);
+
+
+updateUI();
+
+}
+);
+
+
+
+/* =====================================================
+GOAL FORM
+===================================================== */
+
+document
+.getElementById(
+"goalForm"
+)
+.addEventListener(
+"submit",
+event => {
+
+/*
+Stop page refresh
+*/
+
+event.preventDefault();
+
+
+const type =
+document.getElementById(
+"goalType"
+).value;
+
+
+const target =
+Math.max(
+
+1,
+
+Number(
+document.getElementById(
+"goalTarget"
+).value
+)
+
+);
+
+
+/*
+Save goal
+*/
+
+state.goal = {
+
+type: type,
+
+target: target
+
+};
+
+
+saveState();
+
+
+/*
+Show success message
+*/
+
+const saved =
+document.getElementById(
+"goalSaved"
+);
+
+
+saved.classList.remove(
+"hidden"
+);
+
+
+setTimeout(
+() => {
+
+saved.classList.add(
+"hidden"
+);
+
+},
+
+2500
+);
+
+
+updateUI();
+
+}
+);
+
+
+
+/* =====================================================
+RESET BUTTON
+===================================================== */
+
+document
+.getElementById(
+"resetData"
+)
+.addEventListener(
+"click",
+() => {
+
+const confirmed =
+confirm(
+
+"Reset all Laweyti Fitness " +
+"progress and goal data?"
+
+);
+
+
+if (!confirmed) {
+
+return;
+
+}
+
+
+state = {
+
+...defaultState,
+
+activeDates: [],
+
+history: []
+
+};
+
+
+saveState();
+
+
+updateUI();
+
+
+showToast(
+"App data reset."
+);
+
+}
+);
+
+
+
+/* =====================================================
+CALCULATE GOAL PROGRESS
+===================================================== */
+
+function goalProgress() {
+
+/*
+No goal = 0%
+*/
+
+if (
+!state.goal ||
+state.goal.target <= 0
+) {
+
+return 0;
+
+}
+
+
+/*
+Calculate percentage
+*/
+
+return Math.min(
+
+100,
+
+Math.round(
+
+(
+state.workouts /
+state.goal.target
+) * 100
+
+)
+
+);
+
+}
+
+
+
+/* =====================================================
+UPDATE EVERYTHING ON SCREEN
+===================================================== */
+
+function updateUI() {
+
+const today =
+todayKey();
+
+
+/*
+Reset water when a new day starts
+*/
+
+if (
+state.waterDate !== today
+) {
+
+state.waterDate =
+today;
+
+state.water = 0;
+
+saveState();
+
+}
+
+
+/*
+Calculate goal percentage
+*/
+
+const gp =
+goalProgress();
+
+
+/* ---------- HOME ---------- */
+
+document
+.getElementById(
+"homeWorkouts"
+)
+.textContent =
+state.workouts;
+
+
+document
+.getElementById(
+"homeWater"
+)
+.textContent =
+state.water;
+
+
+document
+.getElementById(
+"homeGoal"
+)
+.textContent =
+gp + "%";
+
+
+/* ---------- PROGRESS ---------- */
+
+document
+.getElementById(
+"progressWorkouts"
+)
+.textContent =
+state.workouts;
+
+
+document
+.getElementById(
+"daysActive"
+)
+.textContent =
+state.activeDates.length;
+
+
+document
+.getElementById(
+"progressGoal"
+)
+.textContent =
+gp + "%";
+
+
+/* ---------- WATER ---------- */
+
+document
+.getElementById(
+"waterCount"
+)
+.textContent =
+state.water;
+
+
+/* ---------- PROGRESS BAR ---------- */
+
+document
+.getElementById(
+"progressBar"
+)
+.style.width =
+gp + "%";
+
+
+document
+.getElementById(
+"progressText"
+)
+.textContent =
+
+state.goal
+
+? `You are ${gp}%
+toward your current goal.`
+
+: "Set a goal to start tracking " +
+"your progress.";
+
+
+
+/* =================================================
+CURRENT GOAL
+================================================= */
+
+const goalBox =
+document.getElementById(
+"currentGoalContent"
+);
+
+
+if (state.goal) {
+
+goalBox.innerHTML = `
+
+<div class="goal-detail">
+
+<p>
+
+<strong>
+Goal:
+</strong>
+
+${state.goal.type}
+
+</p>
+
+
+<p>
+
+<strong>
+Target:
+</strong>
+
+${state.goal.target}
+
+</p>
+
+
+<p>
+
+<strong>
+Progress:
+</strong>
+
+${gp}%
+
+</p>
+
+</div>
+
+`;
+
+}
+
+else {
+
+goalBox.innerHTML =
+"No goal has been set yet.";
+
+}
+
+
+
+/* =================================================
+WORKOUT HISTORY
+================================================= */
+
+const history =
+document.getElementById(
+"historyList"
+);
+
+
+if (
+state.history.length
+) {
+
+history.innerHTML =
+
+state.history
+.map(workout => {
+
+return `
+
+<div
+class="history-item">
+
+💪
+
+<strong>
+${workout.exercise}
+</strong>
+
+—
+
+${workout.program}
+
+<br>
+
+<small>
+${workout.date}
+</small>
+
+</div>
+
+`;
+
+})
+.join("");
+
+}
+
+else {
+
+history.innerHTML = `
+
+<p class="history-item">
+
+No workouts completed yet.
+Start your first one!
+
+</p>
+
+`;
+
+}
+
+
+
+/* =================================================
+PUT SAVED GOAL BACK INTO FORM
+================================================= */
+
+if (state.goal) {
+
+document
+.getElementById(
+"goalType"
+)
+.value =
+state.goal.type;
+
+
+document
+.getElementById(
+"goalTarget"
+)
+.value =
+state.goal.target;
+
+}
+
+}
+
+
+
+/* =====================================================
+TOAST NOTIFICATION
+===================================================== */
+
+function showToast(message) {
+
+const toast =
+document.getElementById(
+"toast"
+);
+
+
+toast.textContent =
+message;
+
+
+toast.classList.add(
+"show"
+);
+
+
+clearTimeout(
+window.toastTimer
+);
+
+
+window.toastTimer =
+
+setTimeout(
+() => {
+
+toast.classList.remove(
+"show"
+);
+
+},
+
+2200
+);
+
+}
+
+
+
+/* =====================================================
+START APP
+===================================================== */
+
+/*
+First create the workout cards.
+*/
+
+renderWorkouts();
+
+
+/*
+Then update all numbers.
+*/
+
+updateUI();
